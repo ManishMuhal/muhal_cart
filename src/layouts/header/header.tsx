@@ -71,7 +71,7 @@ const Header = () => {
 
          {/* mobile-menu-area */}
          <div id="header-sticky-2" className={`tpmobile-menu secondary-mobile-menu d-xl-none ${sticky ? 'header-sticky' : ''}`}>
-            <div className="container-fluid">
+            <div className="container-fluid" >
                <div className="row align-items-center">
                   <div className="col-lg-4 col-md-4 col-3 col-sm-3">
                      <div className="mobile-menu-icon">
@@ -81,7 +81,7 @@ const Header = () => {
                   <div className="col-lg-4 col-md-4 col-6 col-sm-4">
                      <div className="header__logo text-center">
                         <Link href="/">
-                           <Image src={logo} alt="logo" style={{height: 'auto'}}/>
+                           <Image src={logo} alt="logo" style={{height: 'auto',width:'100px'}}/>
                         </Link>
                      </div>
                   </div>

@@ -116,15 +116,15 @@ export const mobile_menus = [
     id:1,
     name:'Home',
     link:'/',
-    has_dropdown:true,
-    home_menus:[
-      {title:'Home Page V1',img:'/assets/img/header/home1-1.jpg',link:'/'},
-      {title:'Home Page V2',img:'/assets/img/header/home2-1.jpg',link:'/home-2'},
-      {title:'Home Page V3',img:'/assets/img/header/home3-1.jpg',link:'/home-3'},
-      {title:'Home Page V4',img:'/assets/img/header/home4-1.jpg',link:'/home-4'},
-      {title:'Home Page V5',img:'/assets/img/header/home5-1.jpg',link:'/home-5'},
-      {title:'Home Page V6',img:'/assets/img/header/home6-1.jpg',link:'/home-6'},
-    ]
+    has_dropdown:false ,
+    // home_menus:[
+    //   {title:'Home Page V1',img:'/assets/img/header/home1-1.jpg',link:'/'},
+    //   {title:'Home Page V2',img:'/assets/img/header/home2-1.jpg',link:'/home-2'},
+    //   {title:'Home Page V3',img:'/assets/img/header/home3-1.jpg',link:'/home-3'},
+    //   {title:'Home Page V4',img:'/assets/img/header/home4-1.jpg',link:'/home-4'},
+    //   {title:'Home Page V5',img:'/assets/img/header/home5-1.jpg',link:'/home-5'},
+    //   {title:'Home Page V6',img:'/assets/img/header/home6-1.jpg',link:'/home-6'},
+    // ]
   },
   {
     id:2,
