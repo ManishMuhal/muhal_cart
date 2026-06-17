@@ -279,14 +279,14 @@ const ShopDetailsArea = ({ product,navStyle=false,topThumb=false }: IProps) => {
                         <Rating
                           allowFraction
                           size={16}
-                          initialValue={averageRating(reviews)}
+                          initialValue={averageRating(product.reviews)}
                           readonly={true}
                         />
                       </div>
 
                       <div className={`tpproduct__price`}>
-                        <span>${price.toFixed(2)} </span>
-                        {sale_price && <del>${sale_price.toFixed(2)}</del>}
+                        <span>₹{product.price.toFixed(2)} </span>
+                        {product.sale_price && <del>₹{product.sale_price.toFixed(2)}</del>}
                       </div>
                     </div>
                   </div>

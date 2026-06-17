@@ -18,6 +18,10 @@ const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
   const { orderQuantity } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
+  React.useEffect(() => {
+    setActiveImg(image.original);
+  }, [image.original]);
+
   // handle active image
   const handleActiveImg = (img: string) => {
     setActiveImg(img);
@@ -29,7 +33,7 @@ const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
           <div className="col-lg-6">
             {!navStyle && (
               <div className="tpproduct-details__nab p-relative">
-                {gallery ? (
+                {gallery && gallery.length > 0 ? (
                   gallery.map((item, index) => (
                     <div className="tpproduct-details__thumb" key={index}>
                       <Image src={item} alt="image" width={500} height={500} />

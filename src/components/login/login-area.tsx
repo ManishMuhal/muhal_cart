@@ -44,17 +44,16 @@ const LoginArea = () => {
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'track'>('profile');
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   // Tracking state
   const [trackOrderId, setTrackOrderId] = useState('');
   const [trackedOrder, setTrackedOrder] = useState<Order | null>(null);
   const [trackError, setTrackError] = useState('');
-
-  useEffect(() => {
-    if (userInfo) {
-      fetchUserOrders();
-    }
-  }, [userInfo]);
 
   const fetchUserOrders = async () => {
     setLoadingOrders(true);
@@ -76,6 +75,20 @@ const LoginArea = () => {
       setLoadingOrders(false);
     }
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (userInfo) {
+      fetchUserOrders();
+    }
+  }, [userInfo]);
+
+  if (!mounted) {
+    return null;
+  }
 
   const handleLogout = () => {
     dispatch(logout());
