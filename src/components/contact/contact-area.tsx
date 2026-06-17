@@ -12,7 +12,7 @@ type IProps = {
 }
 function ContactItem ({img,title,add,phone,email}:IProps) {
   return (
-    <div className="col-lg-3 col-md-6">
+    <div className="col-lg-6 col-md-6">
         <div className="tpcontact mb-30">
           <div className="tpcontact__img mb-15 w-img">
               <Image src={`/assets/img/banner/contact-big-bg${img}.jpg`} alt="contact-img" width={330} height={200} style={{height: 'auto'}}/>
@@ -25,10 +25,10 @@ function ContactItem ({img,title,add,phone,email}:IProps) {
                       <a href="#">Add: {add} </a>
                     </li>
                     <li>
-                      <a href="tel:012345678">Phone: {phone}</a>
+                      <a href={`tel:${phone.replace(/\s+/g, '')}`}>Phone: {phone}</a>
                     </li>
                     <li>
-                      <a href="mailto:Muhal Cart@google.com">Email: {email}</a>
+                      <a href={`mailto:${email}`}>Email: {email}</a>
                     </li>
                 </ul>
               </div>
@@ -48,16 +48,14 @@ const ContactArea = () => {
                   <div className="tpcontact-inner-text">
                       <h5 className="tpcontact-inner-sub-title">Contact us</h5>
                       <h5 className="tpcontact-inner-title mb-20">Looking For Muhal Cart?</h5>
-                      <p>The liber tempor cum soluta nobis eleifend option congue doming quod mazim.</p>
+                      <p>We are here to help you. Reach out to us for any queries or support.</p>
                   </div>
                 </div>
             </div>
           </div>
           <div className="row">
-            <ContactItem img="1" title="Rue Pelleport - Paris" add="Heaven Stress, Beverly Melbourne" phone="(+100) 123 456 7890" email="Muhal Cart@google.com"/>
-            <ContactItem img="2" title="Prospect - New York" add="Heaven Stress, Beverly Melbourne" phone="(+100) 123 456 8899" email="Muhal Cart@google.com"/>
-            <ContactItem img="3" title="Budapest - Hungary" add="Heaven Stress, Beverly Melbourne" phone="(+100) 123 456 7755" email="Muhal Cart@google.com"/>
-            <ContactItem img="4" title="Kastrup - Denmark" add="Heaven Stress, Beverly Melbourne" phone="(+100) 123 456 5544" email="Muhal Cart@google.com"/>
+            <ContactItem img="1" title="Muhal Cart Head Office - Churu" add="Churu is a city in the Sekhawati region of Rajasthan state of India" phone="+91 8005753265" email="manishmuhal89@gmail.com"/>
+            <ContactItem img="2" title="Customer Support" add="Churu, Rajasthan, India" phone="+91 8005753265" email="manishmuhal89@gmail.com"/>
           </div>
       </div>
     </section>

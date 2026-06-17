@@ -8,7 +8,6 @@ import { averageRating, discountPercentage, isHot } from "@/utils/utils";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { add_cart_product } from "@/redux/features/cart";
 import { add_to_wishlist } from "@/redux/features/wishlist";
-import { add_to_compare } from "@/redux/features/compare";
 
 // image style
 const imgStyle = {
@@ -28,18 +27,15 @@ const ProductListItem = ({ product }: IProps) => {
     discount = discountPercentage(price, sale_price);
   }
   const [isItemAddToCart, setIsItemAddToCart] = useState(false);
-  const [isCompareAdd, setIsCompareAdd] = useState(false);
   const [isWishlistAdd, setIsWishlistAdd] = useState(false);
   const { cart_products } = useAppSelector((state) => state.cart);
   const { wishlist } = useAppSelector((state) => state.wishlist);
-  const { compare_products } = useAppSelector((state) => state.compare);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setIsItemAddToCart(cart_products.some((i) => i.id === product.id));
     setIsWishlistAdd(wishlist.some((i) => i.id === product.id));
-    setIsCompareAdd(compare_products.some((i) => i.id === product.id));
-  }, [cart_products, compare_products, product.id, wishlist]);
+  }, [cart_products, product.id, wishlist]);
 
   return (
     <div className="tplist__product d-flex align-items-center justify-content-between mb-20">
@@ -110,9 +106,6 @@ const ProductListItem = ({ product }: IProps) => {
         <div className="tplist__shopping">
           <a className="pointer" onClick={() => dispatch(add_to_wishlist(product))}>
             <i className={"icon-heart icons" + (isWishlistAdd ? " active" : "")}></i> wishlist
-          </a>
-          <a className="pointer" onClick={() => dispatch(add_to_compare(product))}>
-            <i className={"icon-layers" + (isCompareAdd ? " active" : "")}></i>Compare
           </a>
         </div>
       </div>

@@ -168,11 +168,6 @@ const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
                   </li>
                   <li>
                     <a href="#">
-                      <i className="icon-layers"></i> Add to Compare
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
                       <i className="icon-share-2"></i> Share
                     </a>
                   </li>

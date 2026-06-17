@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "@/redux/hook";
-import { getCompareProducts } from "@/redux/features/compare";
 import { getWishlistProducts } from "@/redux/features/wishlist";
 import { getCartProducts, initialOrderQuantity } from "@/redux/features/cart";
 import ProductModal from "@/components/common/modal/product-modal";
@@ -21,7 +20,6 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
     dispatch(initialOrderQuantity());
     dispatch(getCartProducts());
     dispatch(getWishlistProducts());
-    dispatch(getCompareProducts());
   }, [router, dispatch]);
 
   

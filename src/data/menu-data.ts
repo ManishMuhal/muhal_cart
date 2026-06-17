@@ -85,11 +85,9 @@ const menu_data:IMenuData[] = [
     has_dropdown:true,
     dropdown_menus:[
       {title:'Shop Location One',link:'/shop-location'},
-      {title:'Shop Location Two',link:'/shop-location-2'},
       {title:'FAQs',link:'/faq'},
       {title:'Checkout',link:'/checkout'},
       {title:'Cart Page',link:'/cart'},
-      {title:'Compare Page',link:'/compare'},
       {title:'Wishlist',link:'/wishlist'},
       {title:'Sign In',link:'/login'},
       {title:'Coming soon',link:'/coming-soon'},
@@ -170,11 +168,9 @@ export const mobile_menus = [
     has_dropdown:true,
     dropdown_menus:[
       {title:'Shop Location One',link:'/shop-location'},
-      {title:'Shop Location Two',link:'/shop-location-2'},
       {title:'FAQs',link:'/faq'},
       {title:'Checkout',link:'/checkout'},
       {title:'Cart Page',link:'/cart'},
-      {title:'Compare Page',link:'/compare'},
       {title:'Wishlist',link:'/wishlist'},
       {title:'Sign In',link:'/login'},
       {title:'Coming soon',link:'/coming-soon'},

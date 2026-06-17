@@ -28,7 +28,7 @@ const FooterTwo = () => {
                     <div className="tpfooter__widget footer-2-col-2 mb-50">
                         <h4 className="tpfooter__widget-title">Need Help?</h4>
                         <p>Got Question?</p>
-                        <a className="tpfooter__phone-num" href="tel:+88-1990-6886">+88-1990-6886</a>
+                        <a className="tpfooter__phone-num" href="tel:+918005753265">+91 8005753265</a>
                         <div className="tpfooter__widget-time-info mt-35">
                           <span>Monday – Friday: <b>8:10 AM – 6:10 PM</b></span>
                           <span>Saturday: <b>10:10 AM – 06:10 PM</b></span>
