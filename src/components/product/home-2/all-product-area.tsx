@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
-import product_data from '@/data/product-data';
 import ProductSingle from '../product-single/product-single';
+import { useAppProducts } from '@/hooks/useAppProducts';
 
 
 const AllProductArea = () => {
-  const products = [...product_data];
+  const products = useAppProducts();
   return (
     <>
     <section className="product-area whight-product pt-75 pb-75 fix">

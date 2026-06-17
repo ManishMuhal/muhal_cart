@@ -1,10 +1,12 @@
+"use client";
 import React from "react";
-import product_data from "@/data/product-data";
+import { useAppProducts } from "@/hooks/useAppProducts";
 import { discountPercentage, isHot } from "@/utils/utils";
 import ProductSmSingle from "../product-single/product-sm-single";
 
 const BestProducts = () => {
-  const products = [...product_data].filter(
+  const allProducts = useAppProducts();
+  const products = [...allProducts].filter(
     (p) => discountPercentage(p.price, p.sale_price!) > 0 || isHot(p.updated_at)
   );
   return (

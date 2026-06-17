@@ -4,6 +4,8 @@ import wishlistSlice from './features/wishlist';
 import  compareSlice from './features/compare';
 import utility from './features/utility';
 import filter from './features/filter';
+import productSlice from './features/productSlice';
+import authSlice from './features/authSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ export const store = configureStore({
     compare:compareSlice,
     utility:utility,
     filter:filter,
+    product:productSlice,
+    auth:authSlice,
   },
 })
 

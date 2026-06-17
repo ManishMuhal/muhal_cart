@@ -5,6 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from 'next/link';
 import ErrorMsg from '../common/error-msg';
+import { useAppDispatch } from '@/redux/hook';
+import { registerUser } from '@/redux/features/authSlice';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 type FormData = {
   name: string;
@@ -19,12 +23,24 @@ const schema = yup.object().shape({
 });
 
 const RegisterForm = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const {register,handleSubmit,reset,formState: { errors }} = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = handleSubmit((data) => {
-    alert(JSON.stringify(data))
-    reset()
+  const onSubmit = handleSubmit(async (data:FormData) => {
+    try {
+      const resultAction = await dispatch(registerUser(data));
+      if (registerUser.fulfilled.match(resultAction)) {
+        toast.success("Successfully registered and logged in!");
+        router.push('/');
+        reset();
+      } else {
+        toast.error((resultAction.payload as string) || "Registration failed");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Registration failed");
+    }
   });
   return (
     <form onSubmit={onSubmit}>
@@ -51,7 +67,7 @@ const RegisterForm = () => {
           <span>
             <i className="fal fa-key"></i>
           </span>
-          <input id='password' {...register("password")} type="text" placeholder="Password" />
+          <input id='password' {...register("password")} type="password" placeholder="Password" />
         </div>
         <ErrorMsg msg={errors.password?.message!} />
       </div>

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import { discountPercentage, isHot } from '@/utils/utils';
 import ProductSingle from '../product-single/product-single';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,11 +18,12 @@ const slider_setting = {
 }
 
 const HighlightProducts = () => {
-  const products = [...product_data].filter(
+  const allProducts = useAppProducts();
+  const products = [...allProducts].filter(
     (p) => discountPercentage(p.price, p.sale_price!) > 0 || isHot(p.updated_at)
   ).slice(0, 8);
 
-  const offer_products = [...product_data].filter(
+  const offer_products = [...allProducts].filter(
     (p) => p.offerDate?.endDate && new Date(p.offerDate?.endDate) > new Date()
   )
 

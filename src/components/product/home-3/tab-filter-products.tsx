@@ -3,7 +3,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { IProductData } from '@/types/product-d-t';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import ProductSingle from '../product-single/product-single';
 import Link from 'next/link';
 
@@ -44,19 +44,21 @@ const slider_setting = {
 const tabs = ['New Arrivals','Features','Best Rate'];
 
 const TabFilterProducts = () => {
+  const allProducts = useAppProducts();
   const [activeTab, setActiveTab] = React.useState(tabs[0]);
-  const [products, setProducts] = React.useState<IProductData[]>([...product_data]);
+
+  const products = React.useMemo(() => {
+    if (activeTab === 'New Arrivals') {
+      return [...allProducts].slice(-10);
+    } else if (activeTab === 'Features') {
+      return [...allProducts].slice(0, 10);
+    } else {
+      return [...allProducts].filter((p) => p.sale_price! > 0).reverse();
+    }
+  }, [allProducts, activeTab]);
 
   const handleFilter = (tab: string) => {
     setActiveTab(tab);
-    if (tab === 'New Arrivals') {
-      setProducts([...product_data].slice(-10));
-    } else if (tab === 'Features') {
-      setProducts([...product_data].slice(0, 10));
-    }
-    else {
-      setProducts([...product_data].filter((p) => p.sale_price!  > 0).reverse());
-    }
   }
   return (
     <>

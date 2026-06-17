@@ -1,11 +1,12 @@
 'use client';
 import React from 'react';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { add_colors } from '@/redux/features/filter';
 
 const ColorFilter = () => {
-  const allColors = product_data.flatMap((item) => item.color);
+  const allProducts = useAppProducts();
+  const allColors = allProducts.flatMap((item) => item.color || []);
   const uniqueColors = [...new Set(allColors)].slice(0, 5);
   const { colors: stateColors } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();

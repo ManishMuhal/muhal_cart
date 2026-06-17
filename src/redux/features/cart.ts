@@ -92,6 +92,10 @@ export const cartSlice = createSlice({
       }
       setLocalStorage("cart_products", state.cart_products);
     },
+    clearCartSilent: (state) => {
+      state.cart_products = [];
+      setLocalStorage("cart_products", state.cart_products);
+    },
     getCartProducts:(state) => {
       state.cart_products = getLocalStorage('cart_products');
     }
@@ -106,6 +110,7 @@ export const {
   quantityDecrement,
   initialOrderQuantity,
   clearCart,
+  clearCartSilent,
   getCartProducts
 } = cartSlice.actions;
 

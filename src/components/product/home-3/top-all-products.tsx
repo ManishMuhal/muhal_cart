@@ -3,7 +3,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { IProductData } from '@/types/product-d-t';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import ProductSingle from '../product-single/product-single';
 
 // slider setting 
@@ -43,16 +43,15 @@ const slider_setting = {
 const tabs = ['All','Fresh Bakery','Biscuits Snack','Fresh Meat'];
 
 const TopAllProducts = () => {
+  const allProducts = useAppProducts();
   const [activeTab, setActiveTab] = React.useState(tabs[0]);
-  const [products, setProducts] = React.useState<IProductData[]>([...product_data]);
+
+  const products = activeTab === 'All'
+    ? allProducts
+    : allProducts.filter((p) => p.category.parent.toLowerCase() === activeTab.toLowerCase());
 
   const handleFilter = (tab: string) => {
     setActiveTab(tab);
-    if (tab === 'All') {
-      setProducts([...product_data]);
-    } else {
-      setProducts([...product_data].filter((p) => p.category.parent.toLowerCase() === tab.toLowerCase()));
-    }
   }
   return (
     <section className="weekly-product-area whight-product grey-bg">

@@ -2,8 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import MobileMenus from "@/layouts/header/mobile-menus";
-import category_data from "@/data/category-data";
 import { useRouter } from "next/navigation";
+import { useAppCategories } from "@/hooks/useAppCategories";
 
 // prop type
 type IProps = {
@@ -12,7 +12,7 @@ type IProps = {
 };
 
 const MobileSidebar = ({ isSidebarOpen, setIsSidebarOpen }: IProps) => {
-  const categories = [...category_data];
+  const categories = useAppCategories();
   const router = useRouter();
   return (
     <>

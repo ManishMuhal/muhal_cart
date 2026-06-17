@@ -3,7 +3,7 @@ import React,{useState} from "react";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import { IProductData } from "@/types/product-d-t";
-import product_data from "@/data/product-data";
+import { useAppProducts } from "@/hooks/useAppProducts";
 import { averageRating, isHot } from "@/utils/utils";
 import ReviewForm from "../form/review-form";
 import { Video } from "../svg";
@@ -20,7 +20,8 @@ type IProps = {
 const ShopDetailsArea = ({ product,navStyle=false,topThumb=false }: IProps) => {
   const [isVideoOpen, setIsVideoOpen] = useState<boolean>(false);
   const {brand,category,gallery,reviews,price,color,quantity,tags,sale_price,description,additionalInfo,productInfoList,videoId} = product;
-  const recent_products = [...product_data].slice(0, 2);
+  const allProducts = useAppProducts();
+  const recent_products = [...allProducts].slice(0, 2);
   return (
     <>
     <section className="shopdetails-area grey-bg pb-50">

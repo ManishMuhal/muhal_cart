@@ -1,17 +1,23 @@
 'use client';
 import { useState, useEffect } from 'react';
-import product_data from '@/data/product-data';
 import { useAppSelector } from '@/redux/hook';
 import { averageRating } from '@/utils/utils';
 import { IProductData } from '@/types/product-d-t';
 import { useSearchParams } from 'next/navigation';
+import { useAppProducts } from './useAppProducts';
 
 export function useProductFilter() {
-  const [products, setProducts] = useState<IProductData[]>([...product_data]);
+  const allProducts = useAppProducts();
+  const [products, setProducts] = useState<IProductData[]>(allProducts);
   const { category, subCategory, sizes, colors, brand, priceValue, ratingValue } = useAppSelector((state) => state.filter);
+  
+  useEffect(() => {
+    setProducts(allProducts);
+  }, [allProducts]);
+
   // filter
   useEffect(() => {
-    let filteredData = [...product_data].filter((p) =>
+    let filteredData = [...allProducts].filter((p) =>
       (category && !subCategory) ? p.category.parent.toLowerCase() === category.toLowerCase() :
         (!category && subCategory) ? p.category.child.toLowerCase() === subCategory.toLowerCase() :
           (category && subCategory) ? p.category.parent.toLowerCase() === category.toLowerCase() && p.category.child.toLowerCase() === subCategory.toLowerCase() :
@@ -35,17 +41,17 @@ export function useProductFilter() {
       });
 
     setProducts(filteredData);
-  }, [brand, category, colors, priceValue, sizes, subCategory, ratingValue]);
+  }, [brand, category, colors, priceValue, sizes, subCategory, ratingValue, allProducts]);
 
   const handleSorting = (item: { value: string; label: string }) => {
     if (item.value === "new") {
-      setProducts([...product_data].slice(-10));
+      setProducts([...allProducts].slice(-10));
     } else if (item.value === "high") {
-      setProducts([...product_data].sort((a, b) => b.price - a.price));
+      setProducts([...allProducts].sort((a, b) => b.price - a.price));
     } else if (item.value === "low") {
-      setProducts([...product_data].sort((a, b) => a.price - b.price));
+      setProducts([...allProducts].sort((a, b) => a.price - b.price));
     } else {
-      setProducts([...product_data]);
+      setProducts([...allProducts]);
     }
   };
 
@@ -66,9 +72,9 @@ export function useProductFilter() {
   };
 
   useEffect(() => {
-    setProducts([...product_data].filter((item) => categoryMatch(item) && titleMatch(item)));
+    setProducts([...allProducts].filter((item) => categoryMatch(item) && titleMatch(item)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [allProducts]);
 
   return {
     products,

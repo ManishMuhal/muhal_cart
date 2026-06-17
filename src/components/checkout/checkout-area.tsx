@@ -5,10 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CheckoutOrder from './checkout-order';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { getCartProducts } from '@/redux/features/cart';
+import { getCartProducts, clearCartSilent } from '@/redux/features/cart';
 import Link from 'next/link';
 import ErrorMsg from '../common/error-msg';
 import useCartInfo from '@/hooks/use-cart-info';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 
 // type form data
@@ -49,6 +51,8 @@ const CheckoutArea = () => {
    const dispatch = useAppDispatch();
    const { total } = useCartInfo();
    const [shipCost,setShipCost] = useState<number | string>(7.00);
+   const { userInfo } = useAppSelector((state) => state.auth);
+   const router = useRouter();
  
    useEffect(() => {
      if (typeof window !== "undefined" && window.localStorage) {
@@ -59,9 +63,61 @@ const CheckoutArea = () => {
    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
      resolver: yupResolver(schema),
    });
-   const onSubmit = handleSubmit((data) => {
-     alert(JSON.stringify(data))
-     reset()
+   
+   const onSubmit = handleSubmit(async (data) => {
+     if (cart_products.length === 0) {
+       toast.error("Your cart is empty");
+       return;
+     }
+
+     const orderId = `MC-${Math.floor(100000 + Math.random() * 900000)}`;
+     const items = cart_products.map((p) => ({
+       id: p.id,
+       title: p.title,
+       price: p.sale_price ? p.sale_price : p.price,
+       quantity: p.orderQuantity || 1,
+       thumbnail: p.image?.original || ''
+     }));
+
+     const totalAmount = typeof shipCost === 'number' ? (total + shipCost) : total;
+
+     const payload = {
+       orderId,
+       user: userInfo?._id || null,
+       items,
+       shippingAddress: {
+         name: `${data.firstName} ${data.lastName}`,
+         phone: data.phone,
+         address: `${data.address}, ${data.apartment || ''}`,
+         city: data.city,
+         country: data.country
+       },
+       paymentMethod: 'Direct Bank Transfer',
+       totalAmount
+     };
+
+     try {
+       const response = await fetch('http://localhost:5000/api/v1/orders', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+           ...(userInfo?.token ? { 'Authorization': `Bearer ${userInfo.token}` } : {})
+         },
+         body: JSON.stringify(payload),
+       });
+
+       const resData = await response.json();
+       if (!response.ok) {
+         throw new Error(resData.error || 'Failed to place order');
+       }
+
+       toast.success(`Order placed successfully! Order ID: ${orderId}`);
+       dispatch(clearCartSilent());
+       reset();
+       router.push('/');
+     } catch (err: any) {
+       toast.error(err.message || 'Error occurred while placing order');
+     }
    });
   return (
     <section className="checkout-area pb-50">

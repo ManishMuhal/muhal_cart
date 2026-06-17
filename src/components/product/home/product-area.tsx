@@ -2,8 +2,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import product_data from '@/data/product-data';
 import ProductSingle from '../product-single/product-single';
+import { useAppProducts } from '@/hooks/useAppProducts';
 
 // slider setting
 const slider_setting = {
@@ -39,7 +39,8 @@ const slider_setting = {
 }
 
 const ProductArea = () => {
-   const products = [...product_data].slice(-10);
+   const allProducts = useAppProducts();
+   const products = [...allProducts].slice(-10);
   return (
     <>
      <section className="product-area grey-bg pb-0">

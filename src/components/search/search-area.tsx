@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import { IProductData } from '@/types/product-d-t';
 import { FourColDots, ListDots, ThreeColDots } from '../svg';
 import usePagination from '@/hooks/use-pagination';
@@ -19,9 +19,8 @@ const col_tabs = [
 
 
 const SearchArea = () => {
-  const [productItems, setProductItems] = useState<IProductData[]>([
-    ...product_data,
-  ]);
+  const allProducts = useAppProducts();
+  const [productItems, setProductItems] = useState<IProductData[]>([]);
   const [activeTab, setActiveTab] = useState(col_tabs[0].title);
   const pagination_per_page = activeTab === "four-col" ? 12 : 9;
   const {currentItems,handlePageClick,pageCount} = usePagination<IProductData>(productItems, pagination_per_page);
@@ -34,24 +33,23 @@ const SearchArea = () => {
   const category = searchParams.get("category");
   const searchText = searchParams.get("searchText");
 
-  const categoryMatch = (item: IProductData) => {
-    return (
-      !category || item.category.parent.split(" ").join("-").toLowerCase().includes(category)
-    );
-  };
-
-  const titleMatch = (item: IProductData) => {
-    return (
-      !searchText || item.title.toLowerCase().includes(searchText.toLowerCase())
-    );
-  };
-
   useEffect(() => {
+    const categoryMatch = (item: IProductData) => {
+      return (
+        !category || item.category.parent.split(" ").join("-").toLowerCase().includes(category)
+      );
+    };
+
+    const titleMatch = (item: IProductData) => {
+      return (
+        !searchText || item.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+    };
+
     setProductItems(
-      product_data.filter((item) => categoryMatch(item) && titleMatch(item))
+      allProducts.filter((item) => categoryMatch(item) && titleMatch(item))
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category,searchText]);
+  }, [allProducts, category, searchText]);
 
   const handleSorting = (item: { value: string; label: string }) => {
     if (item.value === "new") {

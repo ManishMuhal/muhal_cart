@@ -3,8 +3,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import category_data from "@/data/category-data";
 import { useRouter } from "next/navigation";
+import { useAppCategories } from "@/hooks/useAppCategories";
 
 // prop type
 type IProps = {
@@ -15,6 +15,7 @@ type IProps = {
 
 const CategoryArea = ({cls,perView=8,showCount=true}:IProps) => {
   const router = useRouter();
+  const categories = useAppCategories();
   // slider setting
   const slider_setting = {
     slidesPerView: perView,
@@ -52,17 +53,23 @@ const CategoryArea = ({cls,perView=8,showCount=true}:IProps) => {
   return (
     <>
       <Swiper {...slider_setting} className={`swiper-container ${cls}`}>
-        {category_data.map((item) => (
+        {categories.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="category__item mb-30">
               <div className="category__thumb fix mb-15">
                 <a onClick={() => handleCategorySearch(item.name)} className="pointer">
-                  <Image
-                    src={item.img}
-                    width={80}
-                    height={80}
-                    alt="category-thumb"
-                  />
+                  {item.img ? (
+                    <Image
+                      src={item.img}
+                      width={80}
+                      height={80}
+                      alt="category-thumb"
+                    />
+                  ) : (
+                    <div style={{ width: 80, height: 80, backgroundColor: '#eee', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span>{item.name.substring(0, 2)}</span>
+                    </div>
+                  )}
                 </a>
               </div>
               <div className="category__content">

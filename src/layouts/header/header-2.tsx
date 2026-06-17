@@ -11,10 +11,12 @@ import SearchPopup from '@/components/common/modal/search-popup';
 import CartSidebar from '@/components/sidebar/cart-sidebar';
 import useCartInfo from '@/hooks/use-cart-info';
 import MobileSidebar from '@/components/sidebar/mobile-sidebar';
+import { useAppSelector } from '@/redux/hook';
 
 const HeaderTwo = () => {
    const {sticky} = useSticky();
    const {quantity} = useCartInfo();
+   const { userInfo } = useAppSelector((state) => state.auth);
    const [isSearchOpen, setIsSearchOpen] = React.useState(false);
    const [isCartOpen, setIsCartOpen] = React.useState(false);
    const [isMobileSidebarOpen,setIsMobileSidebarOpen] = React.useState(false);
@@ -47,7 +49,10 @@ const HeaderTwo = () => {
                               <button onClick={() => setIsSearchOpen(true)} className="tp-search-toggle"><i className="icon-search"></i></button>
                            </div>
                            <div className="header__info-user tpcolor__yellow ml-10">
-                              <Link href="/login"><i className="icon-user"></i></Link>
+                              <Link href="/login" className="d-flex align-items-center">
+                                 <i className="icon-user"></i>
+                                 {userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
+                              </Link>
                            </div>
                            <div className="header__info-wishlist tpcolor__greenish ml-10">
                               <Link href="/wishlist"><i className="icon-heart icons"></i></Link>
@@ -98,7 +103,10 @@ const HeaderTwo = () => {
                            <button onClick={() => setIsSearchOpen(true)} className="tp-search-toggle"><i className="icon-search"></i></button>
                         </div>
                         <div className="header__info-user tpcolor__yellow ml-10 d-none d-sm-block">
-                           <Link href="/login"><i className="icon-user"></i></Link>
+                           <Link href="/login" className="d-flex align-items-center">
+                              <i className="icon-user"></i>
+                              {userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
+                           </Link>
                         </div>
                         <div className="header__info-wishlist tpcolor__greenish ml-10 d-none d-sm-block">
                            <Link href="/wishlist"><i className="icon-heart icons"></i></Link>

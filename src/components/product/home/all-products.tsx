@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import ProductSingle from '../product-single/product-single';
-import product_data from '@/data/product-data';
 import { IProductData } from '@/types/product-d-t';
+import { useAppProducts } from '@/hooks/useAppProducts';
 
 // slider setting 
 const slider_setting = {
@@ -49,15 +49,20 @@ type IProps = {
   style_3?: boolean;
 }
 const AllProducts = ({style_2=false,style_3=false}:IProps) => {
+  const allProducts = useAppProducts();
   const [activeTab, setActiveTab] = React.useState(tabs[0]);
-  const [products, setProducts] = React.useState<IProductData[]>([...product_data]);
+  const [products, setProducts] = React.useState<IProductData[]>(allProducts);
+
+  React.useEffect(() => {
+    setProducts(allProducts);
+  }, [allProducts]);
 
   const handleFilter = (tab: string) => {
     setActiveTab(tab);
     if (tab === 'All Products') {
-      setProducts([...product_data]);
+      setProducts(allProducts);
     } else {
-      setProducts([...product_data].filter((p) => p.category.parent.toLowerCase() === tab.toLowerCase()));
+      setProducts([...allProducts].filter((p) => p.category.parent.toLowerCase() === tab.toLowerCase()));
     }
   }
 

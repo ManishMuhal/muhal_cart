@@ -1,11 +1,13 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
-import product_data from '@/data/product-data';
+import { useAppProducts } from '@/hooks/useAppProducts';
 import ProductBrandSingle from '../product-single/product-sm-single';
 import brand_thumb from '@/assets/img/brand/brand-thumb-1.png';
 
 const ProductBrandFeature = () => {
-  const brand_products = [...product_data].filter(p => p.brand === 'Super Market');
+  const allProducts = useAppProducts();
+  const brand_products = [...allProducts].filter(p => p.brand === 'Super Market');
   return (
    <section className="brand-product grey-bg pb-60">
       <div className="container">

@@ -3,7 +3,7 @@ import Wrapper from "@/layouts/wrapper";
 import Header from "@/layouts/header/header";
 import FeatureArea from "@/components/feature/feature-area";
 import BreadcrumbThree from "@/components/breadcrumb/breadcrumb-3";
-import product_data from "@/data/product-data";
+import { getServerProducts } from "@/utils/utils";
 import Footer from "@/layouts/footer/footer";
 import ShopDetailsArea from "@/components/shop-details/shop-details-area";
 import RelatedProducts from "@/components/product/related-products";
@@ -12,8 +12,20 @@ export const metadata: Metadata = {
   title: "Shop Details Three - Muhal Cart",
 };
 
-export default function ShopDetailsThreePage() {
-  const product = [...product_data][0];
+export default async function ShopDetailsThreePage() {
+  const products = await getServerProducts();
+  const product = products[0];
+  if (!product) {
+    return (
+      <Wrapper>
+        <Header />
+        <main className="text-center pt-100 pb-100">
+          <h3>No products found</h3>
+        </main>
+        <Footer />
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       {/* header start */}

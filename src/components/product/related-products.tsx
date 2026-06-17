@@ -2,7 +2,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import product_data from "@/data/product-data";
+import { useAppProducts } from "@/hooks/useAppProducts";
 import ProductSingle from "./product-single/product-single";
 
 // slider setting
@@ -44,7 +44,8 @@ type IProps = {
 };
 
 const RelatedProducts = ({ category }: IProps) => {
-  const related_products = [...product_data].filter(
+  const allProducts = useAppProducts();
+  const related_products = [...allProducts].filter(
     (p) => p.category.parent.toLowerCase() === category.toLowerCase()
   );
   return (

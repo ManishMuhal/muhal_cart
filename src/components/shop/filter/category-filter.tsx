@@ -1,11 +1,11 @@
 'use client';
 import React from "react";
-import category_data from "@/data/category-data";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { add_category, add_sub_category } from "@/redux/features/filter";
+import { useAppCategories } from "@/hooks/useAppCategories";
 
 const CategoryFilter = () => {
-  const categories = [...category_data];
+  const categories = useAppCategories();
 
   const {category:parentCategory,subCategory} = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch()
