@@ -36,8 +36,8 @@ const ProductSmSingle = ({ product }: IProps) => {
          <Rating allowFraction size={16} initialValue={averageRating(product.reviews)} readonly={true} />
         </div>
         <div className="tpproduct__price">
-          <span>${product.sale_price ? product.sale_price : product.price} </span>
-          {product.sale_price && <del>${product.price}</del>}
+          <span>₹{product.sale_price ? product.sale_price : product.price} </span>
+          {product.sale_price && <del>₹{product.price}</del>}
         </div>
       </div>
     </div>

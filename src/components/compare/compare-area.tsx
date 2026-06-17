@@ -69,9 +69,9 @@ const CompareArea = () => {
                       {compare_products.map((item, index) => (
                         <td key={index}>
                           <div className="tp-compare-price">
-                            <span>${item.sale_price?.toFixed()}</span>
+                            <span>₹{item.sale_price?.toFixed()}</span>
                             {item.sale_price && (
-                              <span className="old-price">${item.price.toFixed(2)}</span>
+                              <span className="old-price">₹{item.price.toFixed(2)}</span>
                             )}
                           </div>
                         </td>

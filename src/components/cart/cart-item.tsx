@@ -30,9 +30,9 @@ const CartItem = ({ product }: IProps) => {
       </td>
       <td className="product-price">
         {product.sale_price ? (
-          <span className="amount">${product.sale_price.toFixed(2)}</span>
+          <span className="amount">₹{product.sale_price.toFixed(2)}</span>
         ) : (
-          <span className="amount">${product.price.toFixed(2)}</span>
+          <span className="amount">₹{product.price.toFixed(2)}</span>
         )}
       </td>
       <td className="product-quantity">
@@ -58,7 +58,7 @@ const CartItem = ({ product }: IProps) => {
       {product.orderQuantity && (
         <td className="product-subtotal">
           <span className="amount">
-            $
+            ₹
             {product.sale_price
               ? (product.sale_price * product.orderQuantity).toFixed(2)
               : (product.price * product.orderQuantity).toFixed(2)}

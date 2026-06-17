@@ -106,7 +106,7 @@ const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
           <div className="col-lg-6">
             <div className="product__details product__sticky">
               <div className="product__details-price-box">
-                <h5 className="product__details-price">${price.toFixed(2)}</h5>
+                <h5 className="product__details-price">₹{price.toFixed(2)}</h5>
                 {productInfoList && (
                   <ul className="product__details-info-list">
                     {productInfoList.map((item, index) => (

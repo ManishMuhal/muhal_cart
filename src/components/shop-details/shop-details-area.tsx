@@ -209,7 +209,7 @@ const ShopDetailsArea = ({ product,navStyle=false,topThumb=false }: IProps) => {
                       </div>
                       <div className="tpsidebar__warning-text">
                         <p>
-                          Free shipping apply to all <br /> orders over $90
+                          Free shipping apply to all <br /> orders over ₹90
                         </p>
                       </div>
                     </div>

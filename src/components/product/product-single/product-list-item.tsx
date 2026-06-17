@@ -95,7 +95,7 @@ const ProductListItem = ({ product }: IProps) => {
         <h4 className="tplist__instock">
           Availability: <span>{quantity} in stock</span>{" "}
         </h4>
-        <h3 className="tplist__count mb-15">${sale_price ? sale_price.toFixed(2) : price.toFixed(2)}</h3>
+        <h3 className="tplist__count mb-15">₹{sale_price ? sale_price.toFixed(2) : price.toFixed(2)}</h3>
           {isItemAddToCart ? (
               <Link href="/cart" className="tp-btn-2 mb-10">
                 View Cart

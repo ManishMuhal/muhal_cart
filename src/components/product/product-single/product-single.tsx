@@ -118,8 +118,8 @@ const ProductSingle = ({product,progress,cls,offer_style,price_space}:IProps) =>
         <div
           className={`tpproduct__price ${offer_style ? "tpproduct__big-price" : ""} ${price_space}`}
         >
-          <span>${sale_price ? sale_price.toFixed(2) : price.toFixed(2)} </span>
-          {sale_price && <del>${price.toFixed(2)}</del>}
+          <span>₹{sale_price ? sale_price.toFixed(2) : price.toFixed(2)} </span>
+          {sale_price && <del>₹{price.toFixed(2)}</del>}
         </div>
         {offer_style && (
           <>

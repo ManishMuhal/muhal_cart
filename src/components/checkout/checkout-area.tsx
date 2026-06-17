@@ -250,7 +250,7 @@ const CheckoutArea = () => {
                                                       × {product.orderQuantity}</strong>
                                                    </td>
                                                    <td className="product-total">
-                                                      <span className="amount">${product.sale_price ? product.sale_price.toFixed(2) : product.price.toFixed(2)}</span>
+                                                      <span className="amount">₹{product.sale_price ? product.sale_price.toFixed(2) : product.price.toFixed(2)}</span>
                                                    </td>
                                              </tr>
                                        ))}
@@ -258,7 +258,7 @@ const CheckoutArea = () => {
                                     <tfoot>
                                        <tr className="cart-subtotal">
                                              <th>Cart Subtotal</th>
-                                             <td><span className="amount">${total.toFixed(2)}</span></td>
+                                             <td><span className="amount">₹{total.toFixed(2)}</span></td>
                                        </tr>
                                        <tr className="shipping">
                                              <th>Shipping</th>
@@ -267,7 +267,7 @@ const CheckoutArea = () => {
                                                    <li>
                                                          <input onChange={()=> setShipCost(7.00)} checked={shipCost === 7.00} type="radio" id='shipping' name="shipping"/>
                                                          <label htmlFor='shipping'>
-                                                            Flat Rate: <span className="amount">$7.00</span>
+                                                            Flat Rate: <span className="amount">₹7.00</span>
                                                          </label>
                                                    </li>
                                                    <li>
@@ -282,7 +282,7 @@ const CheckoutArea = () => {
                                              <td>
                                                 <strong>
                                                    <span className="amount">
-                                                      ${typeof shipCost === 'number' ? (total + shipCost).toFixed(2) : total.toFixed(2)}
+                                                      ₹{typeof shipCost === 'number' ? (total + shipCost).toFixed(2) : total.toFixed(2)}
                                                    </span>
                                                 </strong>
                                              </td>

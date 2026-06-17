@@ -67,7 +67,7 @@ const CartSidebar = ({isCartSidebarOpen,setIsCartSidebarOpen}:IProps) => {
                               {item.orderQuantity} x {" "}
                             </span>
                             <span className="new-price">
-                              ${item.orderQuantity ? item.price * item.orderQuantity : item.price}
+                              ₹{item.orderQuantity ? item.price * item.orderQuantity : item.price}
                             </span>
                           </div>
                         </div>
@@ -79,7 +79,7 @@ const CartSidebar = ({isCartSidebarOpen,setIsCartSidebarOpen}:IProps) => {
               <div className="tpcart__checkout">
                 <div className="tpcart__total-price d-flex justify-content-between align-items-center">
                   <span> Subtotal:</span>
-                  <span className="heilight-price"> ${total.toFixed(2)}</span>
+                  <span className="heilight-price"> ₹{total.toFixed(2)}</span>
                 </div>
                 <div className="tpcart__checkout-btn">
                   <Link className="tpcart-btn mb-10" href="/cart">

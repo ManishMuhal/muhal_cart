@@ -35,9 +35,9 @@ const WishlistItem = ({ product }: IProps) => {
       </td>
       <td className="product-price">
         {product.sale_price ? (
-          <span className="amount">${product.sale_price.toFixed(2)}</span>
+          <span className="amount">₹{product.sale_price.toFixed(2)}</span>
         ) : (
-          <span className="amount">${product.price.toFixed(2)}</span>
+          <span className="amount">₹{product.price.toFixed(2)}</span>
         )}
       </td>
       <td className="product-add-to-cart">

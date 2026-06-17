@@ -282,7 +282,7 @@ const LoginArea = () => {
                               <td><strong>{order.orderId}</strong></td>
                               <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                               <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)} items</td>
-                              <td>${order.totalAmount.toFixed(2)}</td>
+                              <td>₹{order.totalAmount.toFixed(2)}</td>
                               <td>
                                 <span className={`badge px-2 py-1 ${
                                   order.deliveryStatus === 'Delivered' ? 'bg-success' :
@@ -354,7 +354,7 @@ const LoginArea = () => {
                         </div>
                         <div>
                           <span className="text-muted small d-block">TOTAL AMOUNT</span>
-                          <h5>${trackedOrder.totalAmount.toFixed(2)}</h5>
+                          <h5>₹{trackedOrder.totalAmount.toFixed(2)}</h5>
                         </div>
                         <div>
                           <span className="text-muted small d-block">STATUS</span>
@@ -439,10 +439,10 @@ const LoginArea = () => {
                                 </div>
                                 <div className="flex-grow-1">
                                   <span className="small fw-medium d-block text-truncate" style={{ maxWidth: '250px' }}>{item.title}</span>
-                                  <span className="text-muted small">{item.quantity} x ${item.price.toFixed(2)}</span>
+                                  <span className="text-muted small">{item.quantity} x ₹{item.price.toFixed(2)}</span>
                                 </div>
                                 <div className="fw-semibold text-end">
-                                  ${(item.quantity * item.price).toFixed(2)}
+                                  ₹{(item.quantity * item.price).toFixed(2)}
                                 </div>
                               </div>
                             ))}

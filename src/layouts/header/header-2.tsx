@@ -20,6 +20,12 @@ const HeaderTwo = () => {
    const [isSearchOpen, setIsSearchOpen] = React.useState(false);
    const [isCartOpen, setIsCartOpen] = React.useState(false);
    const [isMobileSidebarOpen,setIsMobileSidebarOpen] = React.useState(false);
+   const [mounted, setMounted] = React.useState(false);
+
+   React.useEffect(() => {
+      setMounted(true);
+   }, []);
+
   return (
     <>
        <header>
@@ -51,7 +57,7 @@ const HeaderTwo = () => {
                            <div className="header__info-user tpcolor__yellow ml-10">
                               <Link href="/login" className="d-flex align-items-center">
                                  <i className="icon-user"></i>
-                                 {userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
+                                 {mounted && userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
                               </Link>
                            </div>
                            <div className="header__info-wishlist tpcolor__greenish ml-10">
@@ -105,7 +111,7 @@ const HeaderTwo = () => {
                         <div className="header__info-user tpcolor__yellow ml-10 d-none d-sm-block">
                            <Link href="/login" className="d-flex align-items-center">
                               <i className="icon-user"></i>
-                              {userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
+                              {mounted && userInfo && <span style={{ fontSize: '13px', fontWeight: '600', marginLeft: '5px' }}>{userInfo.name.split(' ')[0]}</span>}
                            </Link>
                         </div>
                         <div className="header__info-wishlist tpcolor__greenish ml-10 d-none d-sm-block">
