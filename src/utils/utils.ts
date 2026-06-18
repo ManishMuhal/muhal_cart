@@ -47,7 +47,7 @@ export function averageRating(reviews: IReview[]) {
   return Number(avgRating.toFixed(0));
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muhalcartbackend-production.up.railway.app';
 
 function formatImageUrl(url: string | undefined): string {
   if (!url) return '';

@@ -16,7 +16,7 @@ const initialState: ProductState = {
   error: null,
 };
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muhalcartbackend-production.up.railway.app';
 
 function formatImageUrl(url: string | undefined): string {
   if (!url) return '';
@@ -54,15 +54,16 @@ export const fetchProductsAndCategories = createAsyncThunk(
 
       const products: IProductData[] = prodData.items.map((p: any) => ({
         ...p,
+        quantity: typeof p.stock !== 'undefined' ? p.stock : p.quantity,
         image: p.thumbnail ? {
           id: Number(p.thumbnail.id) || 1,
           original: formatImageUrl(p.thumbnail.url),
           thumbnail: formatImageUrl(p.thumbnail.url)
         } : { id: 1, original: '' },
-        category: p.category ? {
-          parent: p.category.parent || '',
-          child: p.category.child || ''
-        } : { parent: '', child: '' },
+        category: {
+          parent: p.category?.parent || (p.product_categories && p.product_categories[0]?.name) || '',
+          child: p.category?.child || (p.product_categories && p.product_categories[0]?.name) || ''
+        },
         reviews: p.reviews || [],
         gallery: (p.gallery || (p.images || []).map((img: any) => img.url)).map(formatImageUrl)
       }));

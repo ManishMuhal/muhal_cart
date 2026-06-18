@@ -27,7 +27,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muhalcartbackend-production.up.railway.app';
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',

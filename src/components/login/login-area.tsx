@@ -35,7 +35,7 @@ interface Order {
   createdAt: string;
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muhalcartbackend-production.up.railway.app';
 
 const LoginArea = () => {
   const dispatch = useAppDispatch();
