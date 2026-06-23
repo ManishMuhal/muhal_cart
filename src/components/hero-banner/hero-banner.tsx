@@ -46,9 +46,32 @@ function ShapeImg({ img, cls }: { img: StaticImageData; cls: string }) {
   );
 }
 
+const bubbleStyle = `
+  .bubble-wrapper {
+    display: inline-block;
+  }
+  .bubble-animation {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: bubble-morph 8s ease-in-out infinite alternate, float 4s ease-in-out infinite;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  @keyframes bubble-morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+`;
+
 const HeroBanner = () => {
   return (
     <>
+      <style>{bubbleStyle}</style>
       <section className="slider-area tpslider-delay">
         <Swiper
           {...slider_setting}
@@ -82,14 +105,17 @@ const HeroBanner = () => {
                     </div>
                     <div className="col-xxl-7 col-lg-6 col-md-6 col-12 col-sm-6">
                       <div className="tpslider__thumb p-relative pt-15">
-                        <Image
-                          className="tpslider__thumb-img"
-                          src={item.bg_img}
-                          width={746}
-                          height={485}
-                          alt="slider-bg"
-                          style={img_style}
-                        />
+                        <div className="bubble-wrapper tpslider__thumb-img">
+                          <Image
+                            className="bubble-animation"
+                            src={item.bg_img}
+                            width={746}
+                            height={485}
+                            alt="slider-bg"
+                            style={img_style}
+                            priority={item.id === 1}
+                          />
+                        </div>
                         <div className="tpslider__shape d-none d-md-block">
                           {/* <ShapeImg img={shape_1} cls="tpslider__shape-one" /> */}
                           {/* <ShapeImg img={shape_2} cls="tpslider__shape-two" />

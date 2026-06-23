@@ -5,21 +5,21 @@ export const hero_slider_data = [
     subtitle:'Top Seller In The Week',
     title:'Choose Your Healthy Lifestyle.',
     sm_desc:'Presentation matters. Our fresh Vietnamese vegetable rolls <br/> look good and taste even better',
-    bg_img:'/assets/img/slider/dry-sukha.png',
+    bg_img:'/assets/img/slider/slider1.png',
   },
   {
     id:2,
     subtitle:'Top Seller In The Week',
     title:'Fresh Bread <br/> Oatmeal Crumble.',
     sm_desc:'Presentation matters. Our fresh Vietnamese vegetable rolls <br/> look good and taste even better',
-    bg_img:'/assets/img/slider/slider-bg-2.png',
+    bg_img:'/assets/img/slider/slider2.png',
   },
   {
     id:3,
     subtitle:'Top Seller In The Week',
     title:'The Best <br/> Health Fresh.',
     sm_desc:'Presentation matters. Our fresh Vietnamese vegetable rolls <br/> look good and taste even better',
-    bg_img:'/assets/img/slider/slider-bg-3.png',
+    bg_img:'/assets/img/slider/slider3.png',
   }
 ]
 // home two
