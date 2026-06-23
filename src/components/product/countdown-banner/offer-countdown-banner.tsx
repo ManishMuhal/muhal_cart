@@ -27,7 +27,11 @@ export default function OfferCountdownBanner({bgClr}:IProps) {
   return (
     <section
       className={`product-coundown-area tpcoundown__bg ${bgClr?bgClr:'grey-bg'} pb-25`}
-      style={{ backgroundImage: "url(/assets/img/banner/coundpwn-bg-1.png)" }}
+      style={{ 
+        backgroundImage: "url(/assets/img/banner/coundpwn-bg-1.png)",
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
+        backgroundBlendMode: "overlay"
+      }}
     >
       <div className="container">
         <div className="row">
