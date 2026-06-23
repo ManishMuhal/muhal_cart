@@ -27,7 +27,7 @@ type IProps = {
 };
 
 const ProductSingle = ({product,progress,cls,offer_style,price_space}:IProps) => {
-  const {image,price,sale_price,title,updated_at,quantity,sold,category,offerDate,reviews} = product || {};
+  const {image,price,sale_price,title,updated_at,stock,sold,category,offerDate,reviews,unit,weight} = product || {};
 
   let discount = 0;
   if (sale_price) {
@@ -98,6 +98,7 @@ const ProductSingle = ({product,progress,cls,offer_style,price_space}:IProps) =>
         <span
           className={`tpproduct__content-weight ${offer_style ? "mb-10" : ""}`}
         >
+          {weight ? `${weight} ${unit} | ` : unit ? `${unit} | ` : ''}
           <Link href={`/shop-details/${product.id}`}>{category.parent}</Link>,
           <Link href={`/shop-details/${product.id}`}>{category.child}</Link>
         </span>
@@ -127,13 +128,13 @@ const ProductSingle = ({product,progress,cls,offer_style,price_space}:IProps) =>
             <div className="progress mb-5">
               <div
                 className="progress-bar"
-                style={{ width: `${(sold / quantity) * 100}%` }}
+                style={{ width: `${(sold / stock) * 100}%` }}
               ></div>
             </div>
             <span>
               Sold:{" "}
               <b>
-                {sold}/{quantity}
+                {sold}/{stock}
               </b>
             </span>
           </div>

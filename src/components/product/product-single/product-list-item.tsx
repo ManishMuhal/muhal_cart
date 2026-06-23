@@ -21,7 +21,7 @@ type IProps = {
 };
 
 const ProductListItem = ({ product }: IProps) => {
-  const {image,price,sale_price,title,updated_at,quantity,sold,category,unit,reviews,productInfoList} = product || {};
+  const {image,price,sale_price,title,updated_at,stock,sold,category,unit,weight,reviews,productInfoList} = product || {};
   let discount = 0;
   if (sale_price) {
     discount = discountPercentage(price, sale_price);
@@ -72,7 +72,7 @@ const ProductListItem = ({ product }: IProps) => {
         </div>
       </div>
       <div className="tplist__content">
-        <span>{unit}</span>
+        <span>{weight ? `${weight} ${unit}` : unit}</span>
         <h4 className="tplist__content-title">
           <a href="#">{title}</a>
         </h4>
@@ -89,7 +89,7 @@ const ProductListItem = ({ product }: IProps) => {
       </div>
       <div className="tplist__price justify-content-end">
         <h4 className="tplist__instock">
-          Availability: <span>{quantity} in stock</span>{" "}
+          Availability: <span>{stock} in stock</span>{" "}
         </h4>
         <h3 className="tplist__count mb-15">₹{sale_price ? sale_price.toFixed(2) : price.toFixed(2)}</h3>
           {isItemAddToCart ? (

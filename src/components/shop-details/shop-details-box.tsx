@@ -13,7 +13,7 @@ type IProps = {
 };
 
 const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
-  const {gallery,image,price,productInfoList,quantity,color,tags,category} = product;
+  const {gallery,image,price,productInfoList,stock,color,tags,category,weight,unit} = product;
   const [activeImg, setActiveImg] = React.useState(image.original);
   const { orderQuantity } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
@@ -176,7 +176,10 @@ const ShopDetailsBox = ({ product, navStyle, topThumb }: IProps) => {
               <div className="product__details-stock mb-25">
                 <ul>
                   <li>
-                    Availability: <i>{quantity} In stock</i>
+                    Availability: <i>{stock} In stock</i>
+                  </li>
+                  <li>
+                    Weight: <i>{weight ? `${weight} ${unit}` : unit}</i>
                   </li>
                   <li>
                     Categories: <span>{category.parent}</span>

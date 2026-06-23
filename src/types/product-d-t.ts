@@ -22,7 +22,9 @@ export interface IProductData {
     parent: string;
     child: string;
   };
-  quantity: number;
+  stock: number;
+  quantity?: number;
+  weight?: number;
   unit: string;
   gallery?: string[];
   description: string;
